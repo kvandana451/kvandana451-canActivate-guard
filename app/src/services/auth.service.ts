@@ -1,0 +1,36 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+interface User {
+  isLoggedIn: boolean;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  user: User = {
+    isLoggedIn: false,
+  };
+
+  constructor(private router: Router) {}
+  login() {
+    this.user.isLoggedIn = true;
+    localStorage.setItem('user', JSON.stringify(this.user));
+    this.router.navigate(['/dashboard']);
+    console.log(this.user);
+  }
+  logout() {
+    this.user.isLoggedIn = false;
+    localStorage.removeItem('user');
+
+    this.router.navigate(['/login']);
+  }
+  isAuthenticated(): boolean {
+    let storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+
+    return this.user?.isLoggedIn;
+  }
+}
