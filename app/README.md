@@ -1,6 +1,14 @@
 # App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0. But developed using Angular 16.<br>
+Functional Requirements:<br>
+Users should start on the Login Page.<br>
+Clicking Login should authenticate the user and navigate to Dashboard.<br>
+Clicking Logout should log the user out and redirect back to Login Page.<br>
+If a user tries to access /dashboard without logging in, they should be redirected to Login Page.<br>
+If a logged-in user tries to access /login again, they should be redirected to Dashboard.<br>
+
+
 
 ## Development server
 
