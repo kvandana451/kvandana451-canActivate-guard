@@ -1,1 +1,3 @@
-<p>role-selection works!</p>
+<!-- <button (click)="goToAdmin()">Admin Dashboard</button>
+<button (click)="goToUser()">User Dasboard</button> -->
+<button *ngFor="let data of role" (click)="goTo(data)">{{data}} Dashboard</button>

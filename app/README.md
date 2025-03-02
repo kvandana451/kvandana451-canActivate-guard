@@ -8,7 +8,15 @@ Clicking Logout should log the user out and redirect back to Login Page.<br>
 If a user tries to access /dashboard without logging in, they should be redirected to Login Page.<br>
 If a logged-in user tries to access /login again, they should be redirected to Dashboard.<br>
 
-
+Enchancements :
+Soon as user logs-in,<br>
+If they have only one role, they are redirected automatically.<br>
+If a user has multiple roles, they are redirected to a role selection page<br>
+The role selection page shows buttons for each role assigned to the user<br>
+Redirecting Users Based on Selection<br>
+Once the user selects a role:<br>
+Admins → Redirect to /admin-dashboard<br>
+Users → Redirect to /user-dashboard<br>
 
 ## Development server
 

@@ -9,20 +9,26 @@ interface User {
   providedIn: 'root',
 })
 export class AuthService {
-  user: User = {
-    isLoggedIn: false,
-    role: ['admin', 'user'],
-  };
+  user: User = this.getUser();
 
   constructor(private router: Router) {}
   login() {
     this.user.isLoggedIn = true;
     localStorage.setItem('user', JSON.stringify(this.user));
-    if (this.user.role.length > 1) {
-      this.router.navigate(['/role-selection']);
+    if (!this.user.role.length) {
+      this.router.navigate(['/login']);
+      return;
     }
-
-    this.router.navigate(['/dashboard']);
+    if (this.user.role.length > 1) {
+      console.log('yes');
+      this.router.navigate(['/role-selection']);
+      return;
+    }
+    if (this.user.role[0] === 'admin') {
+      this.router.navigate(['/admin-dashboard']);
+    } else {
+      this.router.navigate(['/user-dashboard']);
+    }
     console.log(this.user);
   }
   logout() {
@@ -31,12 +37,21 @@ export class AuthService {
 
     this.router.navigate(['/login']);
   }
-  isAuthenticated(): boolean {
+  getUser() {
     let storedUser = localStorage.getItem('user');
+    let getUser;
     if (storedUser) {
-      this.user = JSON.parse(storedUser);
+      getUser = JSON.parse(storedUser);
+    } else {
+      return {
+        isLoggedIn: false,
+        role: [],
+      };
     }
-
+    return getUser;
+  }
+  isAuthenticated(): boolean {
+    this.user = this.getUser();
     return this.user?.isLoggedIn;
   }
 }
